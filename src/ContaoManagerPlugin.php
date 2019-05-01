@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /*
- * This file is part of the ContaoExtendedFormFields bundle.
+ * This file is part of the ContaoIsotopePdfTemplatesBundle bundle.
  *
  * (c) inspiredminds
  *
@@ -29,7 +29,7 @@ class ContaoManagerPlugin implements BundlePluginInterface
     {
         return [
             BundleConfig::create(ContaoIsotopePdfTemplatesBundle::class)
-                ->setLoadAfter([ContaoCoreBundle::class]),
+                ->setLoadAfter([ContaoCoreBundle::class, 'isotope']),
         ];
     }
 }

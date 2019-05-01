@@ -10,10 +10,4 @@ declare(strict_types=1);
  * @license LGPL-3.0-or-later
  */
 
-namespace InspiredMinds\ContaoIsotopePdfTemplatesBundle;
-
-use Symfony\Component\HttpKernel\Bundle\Bundle;
-
-class ContaoIsotopePdfTemplatesBundle extends Bundle
-{
-}
+\Isotope\Model\Document::registerModelType('template', \InspiredMinds\ContaoIsotopePdfTemplatesBundle\Isotope\Model\Document\Template::class);

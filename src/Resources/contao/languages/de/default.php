@@ -10,10 +10,4 @@ declare(strict_types=1);
  * @license LGPL-3.0-or-later
  */
 
-namespace InspiredMinds\ContaoIsotopePdfTemplatesBundle;
-
-use Symfony\Component\HttpKernel\Bundle\Bundle;
-
-class ContaoIsotopePdfTemplatesBundle extends Bundle
-{
-}
+$GLOBALS['TL_LANG']['MODEL']['tl_iso_document']['template'] = ['Vorlage', 'Vorlage'];
