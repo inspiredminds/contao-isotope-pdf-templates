@@ -12,7 +12,6 @@ declare(strict_types=1);
 
 namespace InspiredMinds\ContaoIsotopePdfTemplatesBundle\Isotope\Model\Document;
 
-use Contao\Config;
 use Contao\FilesModel;
 use Contao\StringUtil;
 use Isotope\Interfaces\IsotopeProductCollection;
@@ -21,14 +20,6 @@ class Template extends \Isotope\Model\Document\Standard
 {
     protected function generatePDF(IsotopeProductCollection $objCollection, array $arrTokens)
     {
-        // TCPDF configuration
-        $l = [
-            'a_meta_dir' => 'ltr',
-            'a_meta_charset' => Config::get('characterSet'),
-            'a_meta_language' => substr($GLOBALS['TL_LANGUAGE'], 0, 2),
-            'w_page' => 'page',
-        ];
-
         // Include TCPDF config
         if (file_exists(TL_ROOT.'/system/config/tcpdf.php')) {
             require_once TL_ROOT.'/system/config/tcpdf.php';
@@ -39,37 +30,21 @@ class Template extends \Isotope\Model\Document\Standard
         }
 
         // Create new PDF document
-        $pdf = new \setasign\Fpdi\Tcpdf\Fpdi(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true);
+        $pdf = new \Mpdf\Mpdf([
+            'format' => PDF_PAGE_FORMAT,
+            'orientation' => PDF_PAGE_ORIENTATION,
+            'margin_left' => PDF_MARGIN_LEFT,
+            'margin_right' => PDF_MARGIN_RIGHT,
+            'margin_top' => PDF_MARGIN_TOP,
+            'margin_bottom' => PDF_MARGIN_BOTTOM,
+            'default_font_size' => PDF_FONT_SIZE_MAIN,
+	        'default_font' => PDF_FONT_NAME_MAIN,
+        ]);
 
         // Set document information
         $pdf->SetCreator(PDF_CREATOR);
         $pdf->SetAuthor(PDF_AUTHOR);
         $pdf->SetTitle(StringUtil::parseSimpleTokens($this->documentTitle, $arrTokens));
-
-        // Prevent font subsetting (huge speed improvement)
-        $pdf->setFontSubsetting(false);
-
-        // Remove default header/footer
-        $pdf->setPrintHeader(false);
-        $pdf->setPrintFooter(false);
-
-        // Set margins
-        $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-
-        // Set auto page breaks
-        $pdf->SetAutoPageBreak(true, PDF_MARGIN_BOTTOM);
-
-        // Set image scale factor
-        $pdf->setImageScale(PDF_IMAGE_SCALE_RATIO);
-
-        // Set some language-dependent strings
-        $pdf->setLanguageArray($l);
-
-        // Set font
-        $pdf->SetFont(PDF_FONT_NAME_MAIN, '', PDF_FONT_SIZE_MAIN);
-
-        // Initialize document and add a page
-        $pdf->AddPage();
 
         // Check to use template
         if ($this->usePdfTemplate) {
@@ -77,20 +52,19 @@ class Template extends \Isotope\Model\Document\Standard
             if (null !== ($file = FilesModel::findById($this->usePdfTemplateSRC))) {
                 // Check if file exists
                 if (file_exists(TL_ROOT.'/'.$file->path)) {
-                    $pagecount = $pdf->setSourceFile(TL_ROOT.'/'.$file->path);
-
-                    if ($pagecount > 0) {
-                        $tpl = $pdf->importPage(1);
-                        $pdf->useTemplate($tpl);
-                    }
+                    $pdf->SetDocTemplate(TL_ROOT.'/'.$file->path, true);
                 }
             }
         }
 
-        // Write the HTML content
-        $pdf->writeHTML($this->generateTemplate($objCollection, $arrTokens), true, 0, true, 0);
+        // Initialize document and add a page
+        $pdf->AddPage();
 
-        $pdf->lastPage();
+        // Write the HTML content
+        $pdf->WriteHTML($this->generateTemplate($objCollection, $arrTokens));
+
+        // Reset template
+        $pdf->SetDocTemplate();
 
         // Check to append PDF
         if ($this->appendPdfTemplate) {
@@ -98,12 +72,12 @@ class Template extends \Isotope\Model\Document\Standard
             if (null !== ($file = FilesModel::findById($this->appendPdfTemplateSRC))) {
                 // Check if file exists
                 if (file_exists(TL_ROOT.'/'.$file->path)) {
-                    $pagecount = $pdf->setSourceFile(TL_ROOT.'/'.$file->path);
+                    $pagecount = $pdf->SetSourceFile(TL_ROOT.'/'.$file->path);
 
                     for ($i = 1; $i <= $pagecount; ++$i) {
-                        $tpl = $pdf->importPage($i);
                         $pdf->AddPage();
-                        $pdf->useTemplate($tpl);
+                        $tpl = $pdf->ImportPage($i);
+                        $pdf->UseTemplate($tpl);
                     }
                 }
             }
