@@ -6,3 +6,5 @@ Contao Isotope PDF Templates
 =====================
 
 Adds a new document type in Contao Isotope where you can define PDF templates.
+
+![Screenshot](https://raw.githubusercontent.com/inspiredminds/contao-isotope-pdf-templates/master/screenshot.png)
