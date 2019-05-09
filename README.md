@@ -11,6 +11,6 @@ __Important:__ version 2.x of this extension uses [mPDF](https://mpdf.github.io/
 
 * mPDF only supports the following fonts: https://mpdf.github.io/fonts-languages/fonts-in-mpdf-7-x.html.
 * mPDF has superior HTML and CSS capabilities.
-* It is recommended to use full HTML markup in your `iso_document_…` template.
+* It is recommended to use a full HTML markup in your `iso_document_…` template.
 
 ![Screenshot](https://raw.githubusercontent.com/inspiredminds/contao-isotope-pdf-templates/master/screenshot.png)
