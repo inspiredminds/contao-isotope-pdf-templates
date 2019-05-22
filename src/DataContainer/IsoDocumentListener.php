@@ -77,7 +77,7 @@ class IsoDocumentListener
         if ($dc->activeRecord && $dc->activeRecord->customFontsDirectory) {
             if (null !== ($folder = FilesModel::findByUuid($dc->activeRecord->customFontsDirectory))) {
                 $finder = new Finder();
-                $finder->files()->name(['*.ttf', '*.TTF'])->in($this->projectDir.'/'.$folder->path);
+                $finder->files()->name('/\.ttf$/i')->in($this->projectDir.'/'.$folder->path);
                 if ($finder->hasResults()) {
                     foreach ($finder as $file) {
                         $config[] = [
