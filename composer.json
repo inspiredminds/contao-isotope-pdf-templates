@@ -4,6 +4,7 @@
     "keywords": ["contao", "isotope", "pdf", "template", "templates"],
     "type": "contao-bundle",
     "license": "LGPL-3.0-or-later",
+    "homepage": "https://github.com/inspiredminds/contao-isotope-pdf-templates",
     "authors": [
         {
             "name": "Fritz Michael Gschwantner",
