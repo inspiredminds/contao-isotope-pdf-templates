@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace InspiredMinds\ContaoIsotopePdfTemplatesBundle\Isotope\Model\Document;
 
+use Contao\Environment;
 use Contao\FilesModel;
 use Contao\StringUtil;
 use Contao\System;
@@ -60,19 +61,19 @@ class Template extends \Isotope\Model\Document\Standard
         $pdf = new \Mpdf\Mpdf([
             'fontDir' => $fontDirs,
             'fontdata' => $fontData,
-            'format' => PDF_PAGE_FORMAT,
-            'orientation' => PDF_PAGE_ORIENTATION,
-            'margin_left' => PDF_MARGIN_LEFT,
-            'margin_right' => PDF_MARGIN_RIGHT,
-            'margin_top' => PDF_MARGIN_TOP,
-            'margin_bottom' => PDF_MARGIN_BOTTOM,
-            'default_font_size' => PDF_FONT_SIZE_MAIN,
-            'default_font' => PDF_FONT_NAME_MAIN,
+            'format' => \defined('PDF_PAGE_FORMAT') ? PDF_PAGE_FORMAT : 'A4',
+            'orientation' => \defined('PDF_PAGE_ORIENTATION') ? PDF_PAGE_ORIENTATION : 'P',
+            'margin_left' => \defined('PDF_MARGIN_LEFT') ? PDF_MARGIN_LEFT : 15,
+            'margin_right' => \defined('PDF_MARGIN_RIGHT') ? PDF_MARGIN_RIGHT : 15,
+            'margin_top' => \defined('PDF_MARGIN_TOP') ? PDF_MARGIN_TOP : 10,
+            'margin_bottom' => \defined('PDF_MARGIN_BOTTOM') ? PDF_MARGIN_BOTTOM : 10,
+            'default_font_size' => \defined('PDF_FONT_SIZE_MAIN') ? PDF_FONT_SIZE_MAIN : 12,
+            'default_font' => \defined('PDF_FONT_NAME_MAIN') ? PDF_FONT_NAME_MAIN : 'freeserif',
         ]);
 
         // Set document information
-        $pdf->SetCreator(PDF_CREATOR);
-        $pdf->SetAuthor(PDF_AUTHOR);
+        $pdf->SetCreator(\defined('PDF_CREATOR') ? PDF_CREATOR : 'Contao Open Source CMS');
+        $pdf->SetAuthor(\defined('PDF_AUTHOR') ? PDF_AUTHOR : Environment::get('url'));
         $pdf->SetTitle(StringUtil::parseSimpleTokens($this->documentTitle, $arrTokens));
 
         // Dispatch modify pdf event
