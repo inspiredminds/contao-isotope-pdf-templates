@@ -8,7 +8,7 @@ This file is part of the ContaoIsotopePdfTemplatesBundle bundle.
 @license LGPL-3.0-or-later
 EOF;
 
-$finder = PhpCsFixer\Finder::create()
+$finder = (new PhpCsFixer\Finder())
     ->exclude('Resources/contao/templates')
     ->exclude('Fixtures')
     ->in([
@@ -16,7 +16,7 @@ $finder = PhpCsFixer\Finder::create()
     ])
 ;
 
-return PhpCsFixer\Config::create()
+return (new PhpCsFixer\Config())
     ->setRules([
         '@Symfony' => true,
         '@Symfony:risky' => true,
@@ -33,9 +33,11 @@ return PhpCsFixer\Config::create()
         'escape_implicit_backslashes' => true,
         'fully_qualified_strict_types' => true,
         'general_phpdoc_annotation_remove' => [
-            'author',
-            'expectedException',
-            'expectedExceptionMessage',
+            'annoations' => [
+                'author',
+                'expectedException',
+                'expectedExceptionMessage',
+            ],
         ],
         'header_comment' => ['header' => $header],
         'heredoc_to_nowdoc' => true,

@@ -13,7 +13,7 @@ declare(strict_types=1);
 namespace InspiredMinds\ContaoIsotopePdfTemplatesBundle\Event;
 
 use InspiredMinds\ContaoIsotopePdfTemplatesBundle\Isotope\Model\Document\Template;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class ModifyPdfEvent extends Event
 {
