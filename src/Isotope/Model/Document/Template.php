@@ -78,8 +78,8 @@ class Template extends \Isotope\Model\Document\Standard
 
         // Dispatch modify pdf event
         System::getContainer()->get('event_dispatcher')->dispatch(
-            ModifyPdfEvent::EVENT_NAME,
-            new ModifyPdfEvent($pdf, $this)
+            new ModifyPdfEvent($pdf, $this),
+            ModifyPdfEvent::EVENT_NAME
         );
 
         // Check to use template
