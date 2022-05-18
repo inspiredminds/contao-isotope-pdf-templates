@@ -57,23 +57,25 @@ class Template extends \Isotope\Model\Document\Standard
             }
         }
 
+        $margin = StringUtil::deserialize($this->pdfMargin, true);
+
         // Create new PDF document
         $pdf = new \Mpdf\Mpdf([
             'fontDir' => $fontDirs,
             'fontdata' => $fontData,
-            'format' => \defined('PDF_PAGE_FORMAT') ? PDF_PAGE_FORMAT : 'A4',
-            'orientation' => \defined('PDF_PAGE_ORIENTATION') ? PDF_PAGE_ORIENTATION : 'P',
-            'margin_left' => \defined('PDF_MARGIN_LEFT') ? PDF_MARGIN_LEFT : 15,
-            'margin_right' => \defined('PDF_MARGIN_RIGHT') ? PDF_MARGIN_RIGHT : 15,
-            'margin_top' => \defined('PDF_MARGIN_TOP') ? PDF_MARGIN_TOP : 10,
-            'margin_bottom' => \defined('PDF_MARGIN_BOTTOM') ? PDF_MARGIN_BOTTOM : 10,
-            'default_font_size' => \defined('PDF_FONT_SIZE_MAIN') ? PDF_FONT_SIZE_MAIN : 12,
-            'default_font' => \defined('PDF_FONT_NAME_MAIN') ? PDF_FONT_NAME_MAIN : 'freeserif',
+            'format' => $this->pdfFormat,
+            'orientation' => $this->pdfOrientation,
+            'margin_left' => (int) $margin['left'] ?? 15,
+            'margin_right' => (int) $margin['right'] ?? 15,
+            'margin_top' => (int) $margin['top'] ?? 10,
+            'margin_bottom' => (int) $margin['bottom'] ?? 10,
+            'default_font_size' => (int) $this->pdfDefaultFontSize,
+            'default_font' => $this->pdfDefaultFont,
         ]);
 
         // Set document information
-        $pdf->SetCreator(\defined('PDF_CREATOR') ? PDF_CREATOR : 'Contao Open Source CMS');
-        $pdf->SetAuthor(\defined('PDF_AUTHOR') ? PDF_AUTHOR : Environment::get('url'));
+        $pdf->SetCreator($this->pdfCreator);
+        $pdf->SetAuthor($this->pdfAuthor ?: Environment::get('url'));
         $pdf->SetTitle(StringUtil::parseSimpleTokens($this->documentTitle, $arrTokens));
 
         // Dispatch modify pdf event
