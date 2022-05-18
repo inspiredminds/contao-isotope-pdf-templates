@@ -103,19 +103,7 @@ $GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfFormat'] = [
     'label' => &$GLOBALS['TL_LANG']['tl_iso_document']['pdfFormat'],
     'exclude' => true,
     'inputType' => 'select',
-    'options' => [
-        'A0' => 'A0',
-        'A1' => 'A1',
-        'A2' => 'A2',
-        'A3' => 'A3',
-        'A4' => 'A4',
-        'A5' => 'A5',
-        'A6' => 'A6',
-        'A7' => 'A7',
-        'A8' => 'A8',
-        'A9' => 'A9',
-        'A10' => 'A10',
-    ],
+    'options' => ['A0', 'A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8', 'A9', 'A10'],
     'eval' => ['tl_class' => 'w50', 'mandatory' => true],
     'sql' => ['type' => 'string', 'length' => 3, 'fixed' => true, 'notnull' => true, 'default' => 'A4'],
 ];
@@ -135,7 +123,7 @@ $GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfMargin'] = [
     'inputType' => 'trbl',
     'options' => ['mm' => 'mm'],
     'eval' => ['tl_class' => 'w50', 'mandatory' => true],
-    'sql' => ['type' => 'string', 'length' => 128, 'notnull' => true, 'default' => serialize(['bottom' => '10', 'left' => '15', 'right' => '15', 'top' => '10', 'unit' => 'mm',])],
+    'sql' => ['type' => 'string', 'length' => 128, 'notnull' => true, 'default' => serialize(['bottom' => '10', 'left' => '15', 'right' => '15', 'top' => '10', 'unit' => 'mm'])],
 ];
 
 $GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfDefaultFont'] = [

@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 $GLOBALS['TL_LANG']['tl_iso_document']['pdftemplate_legend'] = 'PDF template';
 $GLOBALS['TL_LANG']['tl_iso_document']['font_legend'] = 'Fonts';
-$GLOBALS['TL_LANG']['tl_iso_document']['pdfconfig_legend'] = 'PDF Settings';
+$GLOBALS['TL_LANG']['tl_iso_document']['pdfconfig_legend'] = 'PDF settings';
 $GLOBALS['TL_LANG']['tl_iso_document']['usePdfTemplate'] = ['Use PDF template', 'Enables the usage of a PDF template.'];
 $GLOBALS['TL_LANG']['tl_iso_document']['usePdfTemplateSRC'] = ['PDF template', 'Choose the PDF template.'];
 $GLOBALS['TL_LANG']['tl_iso_document']['appendPdfTemplate'] = ['Append PDF template', 'Appends the selected PDF to all documents.'];
@@ -29,5 +29,5 @@ $GLOBALS['TL_LANG']['tl_iso_document']['pdfOrientation'] = ['Orientation', 'Here
 $GLOBALS['TL_LANG']['tl_iso_document']['pdfMargin'] = ['Document margins', 'Here the document margins for the PDF are set.'];
 $GLOBALS['TL_LANG']['tl_iso_document']['pdfDefaultFont'] = ['Main font', 'The main font to be used in the PDF.'];
 $GLOBALS['TL_LANG']['tl_iso_document']['pdfDefaultFontSize'] = ['Font size', 'The font size to be used as the base in the PDF.'];
-$GLOBALS['TL_LANG']['tl_iso_document']['pdfCreator'] = ['Creator', 'The creator of the PDF is entered here.'];
-$GLOBALS['TL_LANG']['tl_iso_document']['pdfAuthor'] = ['Author', 'The author of the PDF is entered here. If this has not been entered, "Environment::get(\'url\')" is used as default.'];
+$GLOBALS['TL_LANG']['tl_iso_document']['pdfCreator'] = ['Creator', 'Define the creator of the PDF here.'];
+$GLOBALS['TL_LANG']['tl_iso_document']['pdfAuthor'] = ['Author', 'Define the author of the PDF here. If this has not been entered, "Environment::get(\'url\')" is used as default.'];

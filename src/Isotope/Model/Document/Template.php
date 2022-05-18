@@ -18,7 +18,6 @@ use Contao\StringUtil;
 use Contao\System;
 use InspiredMinds\ContaoIsotopePdfTemplatesBundle\Event\ModifyPdfEvent;
 use Isotope\Interfaces\IsotopeProductCollection;
-use function unserialize;
 
 class Template extends \Isotope\Model\Document\Standard
 {
@@ -58,17 +57,18 @@ class Template extends \Isotope\Model\Document\Standard
             }
         }
 
-        $margin = unserialize($this->pdfMargin, ['allowed_classes' => false]);
+        $margin = StringUtil::deserialize($this->pdfMargin, true);
+
         // Create new PDF document
         $pdf = new \Mpdf\Mpdf([
             'fontDir' => $fontDirs,
             'fontdata' => $fontData,
             'format' => $this->pdfFormat,
             'orientation' => $this->pdfOrientation,
-            'margin_left' => (int) $margin['left'],
-            'margin_right' => (int) $margin['right'],
-            'margin_top' => (int) $margin['top'],
-            'margin_bottom' => (int) $margin['bottom'],
+            'margin_left' => (int) $margin['left'] ?? 15,
+            'margin_right' => (int) $margin['right'] ?? 15,
+            'margin_top' => (int) $margin['top'] ?? 10,
+            'margin_bottom' => (int) $margin['bottom'] ?? 10,
             'default_font_size' => (int) $this->pdfDefaultFontSize,
             'default_font' => $this->pdfDefaultFont,
         ]);
