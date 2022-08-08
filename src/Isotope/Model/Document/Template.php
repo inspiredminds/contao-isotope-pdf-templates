@@ -63,14 +63,14 @@ class Template extends \Isotope\Model\Document\Standard
         $pdf = new \Mpdf\Mpdf([
             'fontDir' => $fontDirs,
             'fontdata' => $fontData,
-            'format' => $this->pdfFormat,
-            'orientation' => $this->pdfOrientation,
-            'margin_left' => (int) $margin['left'] ?? 15,
-            'margin_right' => (int) $margin['right'] ?? 15,
-            'margin_top' => (int) $margin['top'] ?? 10,
-            'margin_bottom' => (int) $margin['bottom'] ?? 10,
-            'default_font_size' => (int) $this->pdfDefaultFontSize,
-            'default_font' => $this->pdfDefaultFont,
+            'format' => $this->pdfFormat ?: (\defined('PDF_PAGE_FORMAT') ? PDF_PAGE_FORMAT : 'A4'),
+            'orientation' => $this->pdfOrientation ?: (\defined('PDF_PAGE_ORIENTATION') ? PDF_PAGE_ORIENTATION : 'P'),
+            'margin_left' => (int) ($margin['left'] ?? (\defined('PDF_MARGIN_LEFT') ? PDF_MARGIN_LEFT : 15)),
+            'margin_right' => (int) ($margin['right'] ?? (\defined('PDF_MARGIN_RIGHT') ? PDF_MARGIN_RIGHT : 15)),
+            'margin_top' => (int) ($margin['top'] ?? (\defined('PDF_MARGIN_TOP') ? PDF_MARGIN_TOP : 10)),
+            'margin_bottom' => (int) ($margin['bottom'] ?? (\defined('PDF_MARGIN_BOTTOM') ? PDF_MARGIN_BOTTOM : 10)),
+            'default_font_size' => (int) ($this->pdfDefaultFontSize ?: (\defined('PDF_FONT_SIZE_MAIN') ? PDF_FONT_SIZE_MAIN : 1)),
+            'default_font' => $this->pdfDefaultFont ?: (\defined('PDF_FONT_NAME_MAIN') ? PDF_FONT_NAME_MAIN : 'freeserif'),
         ]);
 
         // Set document information
