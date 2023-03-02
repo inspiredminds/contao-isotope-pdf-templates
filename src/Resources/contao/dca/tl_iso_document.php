@@ -105,7 +105,7 @@ $GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfFormat'] = [
     'inputType' => 'select',
     'options' => ['A0', 'A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8', 'A9', 'A10'],
     'eval' => ['tl_class' => 'w50', 'mandatory' => true],
-    'sql' => ['type' => 'string', 'length' => 3, 'fixed' => true, 'notnull' => true, 'default' => 'A4'],
+    'sql' => ['type' => 'string', 'length' => 3, 'default' => 'A4'],
 ];
 
 $GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfOrientation'] = [
@@ -114,7 +114,7 @@ $GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfOrientation'] = [
     'inputType' => 'select',
     'options' => ['P' => 'portrait', 'L' => 'landscape'],
     'eval' => ['tl_class' => 'w50', 'mandatory' => true],
-    'sql' => ['type' => 'string', 'length' => 1, 'fixed' => true, 'notnull' => true, 'default' => 'P'],
+    'sql' => ['type' => 'string', 'length' => 1, 'default' => 'P'],
 ];
 
 $GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfMargin'] = [
@@ -123,7 +123,7 @@ $GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfMargin'] = [
     'inputType' => 'trbl',
     'options' => ['mm' => 'mm'],
     'eval' => ['tl_class' => 'w50', 'mandatory' => true],
-    'sql' => ['type' => 'string', 'length' => 128, 'notnull' => true, 'default' => serialize(['bottom' => '10', 'left' => '15', 'right' => '15', 'top' => '10', 'unit' => 'mm'])],
+    'sql' => ['type' => 'string', 'length' => 128, 'default' => serialize(['bottom' => '10', 'left' => '15', 'right' => '15', 'top' => '10', 'unit' => 'mm'])],
 ];
 
 $GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfDefaultFont'] = [
@@ -131,7 +131,7 @@ $GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfDefaultFont'] = [
     'exclude' => true,
     'inputType' => 'text',
     'eval' => ['tl_class' => 'w50 clr', 'maxlength' => 128, 'mandatory' => true],
-    'sql' => ['type' => 'string', 'length' => 128, 'notnull' => true, 'default' => 'freeserif'],
+    'sql' => ['type' => 'string', 'length' => 128, 'default' => 'freeserif'],
 ];
 
 $GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfDefaultFontSize'] = [
@@ -139,7 +139,7 @@ $GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfDefaultFontSize'] = [
     'exclude' => true,
     'inputType' => 'text',
     'eval' => ['tl_class' => 'w50', 'maxlength' => 4, 'mandatory' => true],
-    'sql' => ['type' => 'string', 'length' => 4, 'fixed' => true, 'notnull' => true, 'default' => '12'],
+    'sql' => ['type' => 'string', 'length' => 4, 'default' => '12'],
 ];
 
 $GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfCreator'] = [
@@ -147,7 +147,7 @@ $GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfCreator'] = [
     'exclude' => true,
     'inputType' => 'text',
     'eval' => ['tl_class' => 'w50', 'maxlength' => 128, 'mandatory' => true],
-    'sql' => ['type' => 'string', 'length' => 128, 'notnull' => true, 'default' => 'Contao Open Source CMS'],
+    'sql' => ['type' => 'string', 'length' => 128, 'default' => 'Contao Open Source CMS'],
 ];
 
 $GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfAuthor'] = [
@@ -155,7 +155,7 @@ $GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfAuthor'] = [
     'exclude' => true,
     'inputType' => 'text',
     'eval' => ['tl_class' => 'w50', 'maxlength' => 128],
-    'sql' => ['type' => 'string', 'length' => 128, 'notnull' => true, 'default' => ''],
+    'sql' => ['type' => 'string', 'length' => 128, 'default' => ''],
 ];
 
 
