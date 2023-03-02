@@ -30,4 +30,4 @@ $GLOBALS['TL_LANG']['tl_iso_document']['pdfMargin'] = ['Document margins', 'Here
 $GLOBALS['TL_LANG']['tl_iso_document']['pdfDefaultFont'] = ['Main font', 'The main font to be used in the PDF.'];
 $GLOBALS['TL_LANG']['tl_iso_document']['pdfDefaultFontSize'] = ['Font size', 'The font size to be used as the base in the PDF.'];
 $GLOBALS['TL_LANG']['tl_iso_document']['pdfCreator'] = ['Creator', 'Define the creator of the PDF here.'];
-$GLOBALS['TL_LANG']['tl_iso_document']['pdfAuthor'] = ['Author', 'Define the author of the PDF here. If this has not been entered, "Environment::get(\'url\')" is used as default.'];
+$GLOBALS['TL_LANG']['tl_iso_document']['pdfAuthor'] = ['Author', 'Define the author of the PDF here. Otherwise the URL will be used by default.'];
