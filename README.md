@@ -33,6 +33,7 @@ The extension provides a `ModifyPdfEvent` with which you can access the `mPDF` I
 to change some parameters or add additional variables etc.
 
 ```php
+// src/EventListener/ModifyPdfEventListener.php
 namespace App\EventListener;
 
 use InspiredMinds\ContaoIsotopePdfTemplatesBundle\Event\ModifyPdfEvent;
