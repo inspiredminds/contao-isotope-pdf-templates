@@ -26,3 +26,28 @@ to configure the discovered font files.
 
 For each font you want to use you need enable it and set the variant and family 
 name of the font.
+
+## Event
+
+The extension provides a `ModifyPdfEvent` with which you can access the `mPDF` Isotope `Document` instance, in order
+to change some parameters or add additional variables etc.
+
+```php
+namespace App\EventListener;
+
+use InspiredMinds\ContaoIsotopePdfTemplatesBundle\Event\ModifyPdfEvent;
+use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
+
+#[AsEventListener(ModifyPdfEvent::EVENT_NAME)]
+class ModifyPdfEventListener
+{
+    public function __invoke(ModifyPdfEvent $event): void
+    {
+        // Access the mPDF object instance
+        $mpdf = $event->getPdf();
+
+        // Access the Isotope Document instance
+        $document = $event->getDocument();
+    }
+}
+```
