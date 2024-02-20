@@ -6,13 +6,12 @@ Contao Isotope PDF Templates
 
 Adds a new document type in Contao Isotope where you can define PDF templates.
 
-__PDF Version:__ PDF document up to PDF version 1.4
-
 __Important:__ version 2.x of this extension uses [mPDF](https://mpdf.github.io/) instead of TCPDF. Here are some things to note:
 
 * mPDF only supports the following fonts: https://mpdf.github.io/fonts-languages/fonts-in-mpdf-7-x.html.
 * mPDF has superior HTML and CSS capabilities.
 * It is recommended to use a full HTML markup in your `iso_document_…` template.
+* By default only PDF documents up to PDF version 1.4 are supported by the FPDI PDF-Parser used by mPDF, thus you may need to convert them to this version beforehand. However, you can [buy the commercial version](https://www.setasign.com/products/fpdi-pdf-parser/) in order to be able to convert any PDF.
 
 ![Screenshot](https://raw.githubusercontent.com/inspiredminds/contao-isotope-pdf-templates/master/screenshot.png)
 
