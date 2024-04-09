@@ -21,6 +21,14 @@ use Isotope\Interfaces\IsotopeProductCollection;
 
 class Template extends \Isotope\Model\Document\Standard
 {
+    public function outputToBrowser(IsotopeProductCollection $objCollection)
+    {
+        parent::outputToBrowser($objCollection);
+
+        // mPDF does not exit when sending to browser, so we exit here
+        exit;
+    }
+
     protected function generatePDF(IsotopeProductCollection $objCollection, array $arrTokens)
     {
         // Get the project directory
