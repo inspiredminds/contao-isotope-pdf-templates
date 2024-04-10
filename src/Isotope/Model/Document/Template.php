@@ -18,6 +18,7 @@ use Contao\StringUtil;
 use Contao\System;
 use InspiredMinds\ContaoIsotopePdfTemplatesBundle\Event\ModifyPdfEvent;
 use Isotope\Interfaces\IsotopeProductCollection;
+use Webmozart\PathUtil\Path;
 
 class Template extends \Isotope\Model\Document\Standard
 {
@@ -52,7 +53,7 @@ class Template extends \Isotope\Model\Document\Standard
         // Add custom fonts
         if ($this->useCustomFonts) {
             if (null !== ($folder = FilesModel::findByUuid($this->customFontsDirectory))) {
-                $fontDirs[] = $projectDir.'/'.$folder->path;
+                $fontDirs[] = Path::join($projectDir, $folder->path);
 
                 $config = StringUtil::deserialize($this->customFontsConfig, true);
                 if (!empty($config)) {
@@ -77,9 +78,11 @@ class Template extends \Isotope\Model\Document\Standard
             'margin_right' => (int) ($margin['right'] ?? (\defined('PDF_MARGIN_RIGHT') ? PDF_MARGIN_RIGHT : 15)),
             'margin_top' => (int) ($margin['top'] ?? (\defined('PDF_MARGIN_TOP') ? PDF_MARGIN_TOP : 10)),
             'margin_bottom' => (int) ($margin['bottom'] ?? (\defined('PDF_MARGIN_BOTTOM') ? PDF_MARGIN_BOTTOM : 10)),
-            'default_font_size' => (int) ($this->pdfDefaultFontSize ?: (\defined('PDF_FONT_SIZE_MAIN') ? PDF_FONT_SIZE_MAIN : 1)),
-            'default_font' => $this->pdfDefaultFont ?: (\defined('PDF_FONT_NAME_MAIN') ? PDF_FONT_NAME_MAIN : 'freeserif'),
         ]);
+
+        // Set default font and size
+        $pdf->SetDefaultFont($this->pdfDefaultFont ?: (\defined('PDF_FONT_NAME_MAIN') ? PDF_FONT_NAME_MAIN : 'freeserif'));
+        $pdf->SetDefaultFontSize((int) ($this->pdfDefaultFontSize ?: (\defined('PDF_FONT_SIZE_MAIN') ? PDF_FONT_SIZE_MAIN : 10)));
 
         // Set document information
         $pdf->SetCreator($this->pdfCreator);
