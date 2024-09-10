@@ -18,11 +18,11 @@ use Contao\StringUtil;
 use Contao\System;
 use InspiredMinds\ContaoIsotopePdfTemplatesBundle\Event\ModifyPdfEvent;
 use Isotope\Interfaces\IsotopeProductCollection;
-use Webmozart\PathUtil\Path;
+use Symfony\Component\Filesystem\Path;
 
 class Template extends \Isotope\Model\Document\Standard
 {
-    public function outputToBrowser(IsotopeProductCollection $objCollection)
+    public function outputToBrowser(IsotopeProductCollection $objCollection): void
     {
         parent::outputToBrowser($objCollection);
 

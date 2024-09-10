@@ -25,6 +25,7 @@ $GLOBALS['TL_LANG']['tl_iso_document']['customFontsConfigVariant'] = 'Variante';
 $GLOBALS['TL_LANG']['tl_iso_document']['customFontsConfigFilename'] = 'Dateiname';
 $GLOBALS['TL_LANG']['tl_iso_document']['customFontsConfigFontname'] = 'Schriftarten Name';
 $GLOBALS['TL_LANG']['tl_iso_document']['pdfFormat'] = ['Format', 'Hier wird das Format für das PDF ausgewählt.'];
+$GLOBALS['TL_LANG']['tl_iso_document']['pdfFormatBlank'] = 'Eigenes Format';
 $GLOBALS['TL_LANG']['tl_iso_document']['pdfOrientation'] = ['Ausrichtung', 'Hier wird die Ausrichtung für das PDF ausgewählt.'];
 $GLOBALS['TL_LANG']['tl_iso_document']['pdfMargin'] = ['Dokumentränder', 'Hier werden die Dokumentränder für das PDF eingestellt.'];
 $GLOBALS['TL_LANG']['tl_iso_document']['pdfDefaultFont'] = ['Hauptschriftart', 'Die Hauptschriftart die im PDF verwendet werden soll.'];

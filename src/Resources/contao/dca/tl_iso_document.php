@@ -10,7 +10,8 @@ declare(strict_types=1);
  * @license LGPL-3.0-or-later
  */
 
-use InspiredMinds\ContaoIsotopePdfTemplatesBundle\DataContainer\IsoDocumentListener;
+use Contao\CoreBundle\DataContainer\PaletteManipulator;
+use InspiredMinds\ContaoIsotopePdfTemplatesBundle\EventListener\DataContainer\IsoDocumentListener;
 
 $GLOBALS['TL_DCA']['tl_iso_document']['config']['onload_callback'][] = [IsoDocumentListener::class, 'onLoadCallback'];
 
@@ -104,7 +105,7 @@ $GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfFormat'] = [
     'exclude' => true,
     'inputType' => 'select',
     'options' => ['A0', 'A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8', 'A9', 'A10'],
-    'eval' => ['tl_class' => 'w50', 'mandatory' => true],
+    'eval' => ['tl_class' => 'w50', 'mandatory' => true, 'includeBlankOption' => true, 'blankOptionLabel' => &$GLOBALS['TL_LANG']['tl_iso_document']['pdfFormatBlank']],
     'sql' => ['type' => 'string', 'length' => 3, 'default' => 'A4'],
 ];
 
@@ -115,6 +116,13 @@ $GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfOrientation'] = [
     'options' => ['P' => 'portrait', 'L' => 'landscape'],
     'eval' => ['tl_class' => 'w50', 'mandatory' => true],
     'sql' => ['type' => 'string', 'length' => 1, 'default' => 'P'],
+];
+
+$GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfFormatCustom'] = [
+    'exclude' => true,
+    'inputType' => 'text',
+    'eval' => ['tl_class' => 'w50', 'maxlength' => 32, 'size' => 2],
+    'sql' => ['type' => 'blob', 'notnull' => false],
 ];
 
 $GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfMargin'] = [
@@ -158,7 +166,6 @@ $GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfAuthor'] = [
     'sql' => ['type' => 'string', 'length' => 128, 'default' => ''],
 ];
 
-
 $GLOBALS['TL_DCA']['tl_iso_document']['palettes']['__selector__'][] = 'usePdfTemplate';
 $GLOBALS['TL_DCA']['tl_iso_document']['palettes']['__selector__'][] = 'appendPdfTemplate';
 $GLOBALS['TL_DCA']['tl_iso_document']['palettes']['__selector__'][] = 'useCustomFonts';
@@ -167,19 +174,20 @@ $GLOBALS['TL_DCA']['tl_iso_document']['subpalettes']['usePdfTemplate'] = 'usePdf
 $GLOBALS['TL_DCA']['tl_iso_document']['subpalettes']['appendPdfTemplate'] = 'appendPdfTemplateSRC';
 $GLOBALS['TL_DCA']['tl_iso_document']['subpalettes']['useCustomFonts'] = 'customFontsDirectory,customFontsConfig';
 
-\Contao\CoreBundle\DataContainer\PaletteManipulator::create()
+PaletteManipulator::create()
     ->addLegend('pdftemplate_legend', 'template_legend')
-    ->addField('usePdfTemplate', 'pdftemplate_legend', \Contao\CoreBundle\DataContainer\PaletteManipulator::POSITION_APPEND)
-    ->addField('appendPdfTemplate', 'pdftemplate_legend', \Contao\CoreBundle\DataContainer\PaletteManipulator::POSITION_APPEND)
+    ->addField('usePdfTemplate', 'pdftemplate_legend', PaletteManipulator::POSITION_APPEND)
+    ->addField('appendPdfTemplate', 'pdftemplate_legend', PaletteManipulator::POSITION_APPEND)
     ->addLegend('font_legend', 'pdftemplate_legend')
-    ->addField('useCustomFonts', 'font_legend', \Contao\CoreBundle\DataContainer\PaletteManipulator::POSITION_APPEND)
-    ->addLegend('pdfconfig_legend', 'pdftemplate_legend', \Contao\CoreBundle\DataContainer\PaletteManipulator::POSITION_AFTER, true)
-    ->addField('pdfFormat', 'pdfconfig_legend', \Contao\CoreBundle\DataContainer\PaletteManipulator::POSITION_APPEND)
-    ->addField('pdfOrientation', 'pdfconfig_legend', \Contao\CoreBundle\DataContainer\PaletteManipulator::POSITION_APPEND)
-    ->addField('pdfMargin', 'pdfconfig_legend', \Contao\CoreBundle\DataContainer\PaletteManipulator::POSITION_APPEND)
-    ->addField('pdfDefaultFont', 'pdfconfig_legend', \Contao\CoreBundle\DataContainer\PaletteManipulator::POSITION_APPEND)
-    ->addField('pdfDefaultFontSize', 'pdfconfig_legend', \Contao\CoreBundle\DataContainer\PaletteManipulator::POSITION_APPEND)
-    ->addField('pdfCreator', 'pdfconfig_legend', \Contao\CoreBundle\DataContainer\PaletteManipulator::POSITION_APPEND)
-    ->addField('pdfAuthor', 'pdfconfig_legend', \Contao\CoreBundle\DataContainer\PaletteManipulator::POSITION_APPEND)
+    ->addField('useCustomFonts', 'font_legend', PaletteManipulator::POSITION_APPEND)
+    ->addLegend('pdfconfig_legend', 'pdftemplate_legend', PaletteManipulator::POSITION_AFTER, true)
+    ->addField('pdfFormat', 'pdfconfig_legend', PaletteManipulator::POSITION_APPEND)
+    ->addField('pdfOrientation', 'pdfconfig_legend', PaletteManipulator::POSITION_APPEND)
+    ->addField('pdfFormatCustom', 'pdfconfig_legend', PaletteManipulator::POSITION_APPEND)
+    ->addField('pdfMargin', 'pdfconfig_legend', PaletteManipulator::POSITION_APPEND)
+    ->addField('pdfDefaultFont', 'pdfconfig_legend', PaletteManipulator::POSITION_APPEND)
+    ->addField('pdfDefaultFontSize', 'pdfconfig_legend', PaletteManipulator::POSITION_APPEND)
+    ->addField('pdfCreator', 'pdfconfig_legend', PaletteManipulator::POSITION_APPEND)
+    ->addField('pdfAuthor', 'pdfconfig_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('template', 'tl_iso_document')
 ;

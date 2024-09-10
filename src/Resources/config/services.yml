@@ -1,5 +1,13 @@
 services:
-  InspiredMinds\ContaoIsotopePdfTemplatesBundle\DataContainer\IsoDocumentListener:
-    public: true
-    arguments:
-      - '%kernel.project_dir%'
+    _defaults:
+        autowire: true
+        autoconfigure: true
+    
+    InspiredMinds\ContaoIsotopePdfTemplatesBundle\:
+        resource: ../src
+        exclude: ../src/{ContaoManager,DependencyInjection,Event,Isotope,Resources}
+
+    InspiredMinds\ContaoIsotopePdfTemplatesBundle\EventListener\DataContainer\IsoDocumentListener:
+        public: true
+        arguments:
+            - '%kernel.project_dir%'
