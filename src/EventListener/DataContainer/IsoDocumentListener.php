@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @license LGPL-3.0-or-later
  */
 
-namespace InspiredMinds\ContaoIsotopePdfTemplatesBundle\DataContainer;
+namespace InspiredMinds\ContaoIsotopePdfTemplatesBundle\EventListener\DataContainer;
 
 use Contao\DataContainer;
 use Contao\FilesModel;

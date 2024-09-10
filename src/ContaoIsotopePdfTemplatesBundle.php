@@ -16,4 +16,8 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class ContaoIsotopePdfTemplatesBundle extends Bundle
 {
+    public function getPath()
+    {
+        return \dirname(__DIR__);
+    }
 }

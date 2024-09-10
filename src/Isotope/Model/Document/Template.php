@@ -18,11 +18,11 @@ use Contao\StringUtil;
 use Contao\System;
 use InspiredMinds\ContaoIsotopePdfTemplatesBundle\Event\ModifyPdfEvent;
 use Isotope\Interfaces\IsotopeProductCollection;
-use Webmozart\PathUtil\Path;
+use Symfony\Component\Filesystem\Path;
 
 class Template extends \Isotope\Model\Document\Standard
 {
-    public function outputToBrowser(IsotopeProductCollection $objCollection)
+    public function outputToBrowser(IsotopeProductCollection $objCollection): void
     {
         parent::outputToBrowser($objCollection);
 
@@ -67,6 +67,10 @@ class Template extends \Isotope\Model\Document\Standard
         }
 
         $margin = StringUtil::deserialize($this->pdfMargin, true);
+
+        if (!$this->pdfFormat) {
+            $this->pdfFormat = array_map('floatval', StringUtil::deserialize($this->pdfFormatCustom, true)) + [210.0, 297.0];
+        }
 
         // Create new PDF document
         $pdf = new \Mpdf\Mpdf([

@@ -11,3 +11,4 @@ declare(strict_types=1);
  */
 
 $GLOBALS['TL_LANG']['MODEL']['tl_iso_document']['template'] = ['Template', 'Template'];
+$GLOBALS['TL_LANG']['ERR']['missingCustomPdfFormat'] = 'No custom format specified.';

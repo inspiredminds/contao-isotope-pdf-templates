@@ -1,5 +1,0 @@
-services:
-  InspiredMinds\ContaoIsotopePdfTemplatesBundle\DataContainer\IsoDocumentListener:
-    public: true
-    arguments:
-      - '%kernel.project_dir%'
