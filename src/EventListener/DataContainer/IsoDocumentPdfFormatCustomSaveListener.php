@@ -20,7 +20,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 /**
  * @Callback(table="tl_iso_document", target="fields.pdfFormatCustom.save")
  */
-class TemplateCustomFormatSaveListener
+class IsoDocumentPdfFormatCustomSaveListener
 {
     private RequestStack $requestStack;
     private TranslatorInterface $translator;

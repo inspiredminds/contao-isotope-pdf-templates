@@ -25,8 +25,10 @@ to configure the discovered font files.
 
 ![Screenshot](https://raw.githubusercontent.com/inspiredminds/contao-isotope-pdf-templates/master/font_screenshot.png)
 
-For each font you want to use you need enable it and set the variant and family 
-name of the font.
+For each font you want to use you need enable it and set the variant and name of the font in lowercase.
+
+_Note:_ mPDF maps certain common font names to its own default fonts. If a font is not working, try setting a more
+unique font name.
 
 ## Event
 
