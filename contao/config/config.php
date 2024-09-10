@@ -10,4 +10,7 @@ declare(strict_types=1);
  * @license LGPL-3.0-or-later
  */
 
-Isotope\Model\Document::registerModelType('template', InspiredMinds\ContaoIsotopePdfTemplatesBundle\Isotope\Model\Document\Template::class);
+use InspiredMinds\ContaoIsotopePdfTemplatesBundle\Isotope\Model\Document\Template;
+use Isotope\Model\Document;
+
+Document::registerModelType('template', Template::class);

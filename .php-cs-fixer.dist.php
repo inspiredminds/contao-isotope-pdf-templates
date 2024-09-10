@@ -9,9 +9,8 @@ This file is part of the ContaoIsotopePdfTemplatesBundle bundle.
 EOF;
 
 $finder = (new PhpCsFixer\Finder())
-    ->exclude('Resources/contao/templates')
-    ->exclude('Fixtures')
     ->in([
+        __DIR__.'/contao',
         __DIR__.'/src',
     ])
 ;
