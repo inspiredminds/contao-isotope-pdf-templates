@@ -21,7 +21,7 @@ class ContaoIsotopePdfTemplatesExtension extends Extension
 {
     public function load(array $configs, ContainerBuilder $container): void
     {
-        (new YamlFileLoader($container, new FileLocator(__DIR__ . '/../../config')))
+        (new YamlFileLoader($container, new FileLocator(__DIR__.'/../../config')))
             ->load('services.yaml')
         ;
     }

@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace InspiredMinds\ContaoIsotopePdfTemplatesBundle\EventListener\DataContainer;
 
 use Contao\CoreBundle\ServiceAnnotation\Callback;
+use Contao\StringUtil;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -30,17 +31,15 @@ class TemplateCustomFormatSaveListener
         $this->translator = $translator;
     }
 
-    /**
-     * @return string|null
-     */
-    public function __invoke($value)
+    public function __invoke($value): string
     {
         $request = $this->requestStack->getCurrentRequest();
+        $values = StringUtil::deserialize($value, true) + ['', ''];
 
-        if (!$value && !$request->request->get('pdfFormat')) {
+        if (!array_filter($values) && !$request->request->get('pdfFormat')) {
             throw new \Exception($this->translator->trans('ERR.missingCustomPdfFormat', [], 'contao_default'));
         }
 
-        return $value;
+        return serialize(array_map('floatval', $values));
     }
 }

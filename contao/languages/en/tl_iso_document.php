@@ -26,7 +26,9 @@ $GLOBALS['TL_LANG']['tl_iso_document']['customFontsConfigFilename'] = 'File name
 $GLOBALS['TL_LANG']['tl_iso_document']['customFontsConfigFontname'] = 'Font family name';
 $GLOBALS['TL_LANG']['tl_iso_document']['pdfFormat'] = ['Format', 'Here can you select the format for the PDF.'];
 $GLOBALS['TL_LANG']['tl_iso_document']['pdfFormatBlank'] = 'Custom format';
+$GLOBALS['TL_LANG']['tl_iso_document']['pdfFormatCustom'] = ['Custom format', 'Enter the width and height in millimeters.'];
 $GLOBALS['TL_LANG']['tl_iso_document']['pdfOrientation'] = ['Orientation', 'Here can you select the orientantion for the PDF.'];
+$GLOBALS['TL_LANG']['tl_iso_document']['pdfOrientationOptions'] = ['P' => 'Portrait', 'L' => 'Landscape'];
 $GLOBALS['TL_LANG']['tl_iso_document']['pdfMargin'] = ['Document margins', 'Here the document margins for the PDF are set.'];
 $GLOBALS['TL_LANG']['tl_iso_document']['pdfDefaultFont'] = ['Main font', 'The main font to be used in the PDF.'];
 $GLOBALS['TL_LANG']['tl_iso_document']['pdfDefaultFontSize'] = ['Font size', 'The font size to be used as the base in the PDF.'];

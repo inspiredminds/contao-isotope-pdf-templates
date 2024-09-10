@@ -105,7 +105,7 @@ $GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfFormat'] = [
     'exclude' => true,
     'inputType' => 'select',
     'options' => ['A0', 'A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8', 'A9', 'A10'],
-    'eval' => ['tl_class' => 'w50', 'mandatory' => true, 'includeBlankOption' => true, 'blankOptionLabel' => &$GLOBALS['TL_LANG']['tl_iso_document']['pdfFormatBlank']],
+    'eval' => ['tl_class' => 'w50', 'includeBlankOption' => true, 'blankOptionLabel' => &$GLOBALS['TL_LANG']['tl_iso_document']['pdfFormatBlank']],
     'sql' => ['type' => 'string', 'length' => 3, 'default' => 'A4'],
 ];
 
@@ -113,7 +113,8 @@ $GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfOrientation'] = [
     'label' => &$GLOBALS['TL_LANG']['tl_iso_document']['pdfOrientation'],
     'exclude' => true,
     'inputType' => 'select',
-    'options' => ['P' => 'portrait', 'L' => 'landscape'],
+    'options' => ['P', 'L'],
+    'reference' => &$GLOBALS['TL_LANG']['tl_iso_document']['pdfOrientationOptions'],
     'eval' => ['tl_class' => 'w50', 'mandatory' => true],
     'sql' => ['type' => 'string', 'length' => 1, 'default' => 'P'],
 ];
@@ -121,7 +122,7 @@ $GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfOrientation'] = [
 $GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfFormatCustom'] = [
     'exclude' => true,
     'inputType' => 'text',
-    'eval' => ['tl_class' => 'w50', 'maxlength' => 32, 'size' => 2],
+    'eval' => ['tl_class' => 'w50', 'maxlength' => 32, 'multiple' => true, 'size' => 2],
     'sql' => ['type' => 'blob', 'notnull' => false],
 ];
 
