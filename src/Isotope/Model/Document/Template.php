@@ -83,15 +83,19 @@ class Template extends \Isotope\Model\Document\Standard
             'margin_top' => (int) ($margin['top'] ?? (\defined('PDF_MARGIN_TOP') ? PDF_MARGIN_TOP : 10)),
             'margin_bottom' => (int) ($margin['bottom'] ?? (\defined('PDF_MARGIN_BOTTOM') ? PDF_MARGIN_BOTTOM : 10)),
         ]);
-
+       
         // Add PDF Header
-        if ($this->usePdfHeader) {
-            $pdf->SetHTMLHeader($this->pdfHeader);
+        if ($this->pdfHeaderTemplate) {
+            $template = new \Isotope\Template($this->pdfHeaderTemplate);
+            $buffer = $template->parse();
+            $pdf->SetHTMLHeader($buffer);
         }
 
         // Add PDF Footer
-        if ($this->usePdfFooter) {
-            $pdf->SetHTMLFooter($this->pdfFooter);
+        if ($this->pdfFooterTemplate) {
+            $template = new \Isotope\Template($this->pdfFooterTemplate);
+            $buffer = $template->parse();
+            $pdf->SetHTMLFooter($buffer);
         }
 
         // Set default font and size
