@@ -84,6 +84,16 @@ class Template extends \Isotope\Model\Document\Standard
             'margin_bottom' => (int) ($margin['bottom'] ?? (\defined('PDF_MARGIN_BOTTOM') ? PDF_MARGIN_BOTTOM : 10)),
         ]);
 
+        // Add PDF Header
+        if ($this->usePdfHeader) {
+            $pdf->SetHTMLHeader($this->pdfHeader);
+        }
+
+        // Add PDF Footer
+        if ($this->usePdfFooter) {
+            $pdf->SetHTMLFooter($this->pdfFooter);
+        }
+
         // Set default font and size
         $pdf->SetDefaultFont($this->pdfDefaultFont ?: (\defined('PDF_FONT_NAME_MAIN') ? PDF_FONT_NAME_MAIN : 'freeserif'));
         $pdf->SetDefaultFontSize((int) ($this->pdfDefaultFontSize ?: (\defined('PDF_FONT_SIZE_MAIN') ? PDF_FONT_SIZE_MAIN : 10)));

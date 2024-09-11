@@ -17,6 +17,40 @@ $GLOBALS['TL_DCA']['tl_iso_document']['config']['onload_callback'][] = [IsoDocum
 
 $GLOBALS['TL_DCA']['tl_iso_document']['palettes']['template'] = $GLOBALS['TL_DCA']['tl_iso_document']['palettes']['standard'];
 
+$GLOBALS['TL_DCA']['tl_iso_document']['fields']['usePdfHeader'] = [
+    'exclude' => true,
+    'inputType' => 'checkbox',
+    'eval' => ['submitOnChange' => true],
+    'sql' => "char(1) NOT NULL default ''",
+];
+
+$GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfHeader'] = [
+    'exclude' => true,
+    'inputType' => 'textarea',
+    'eval' => ['rte' => 'ace|html', 'mandatory' => true, 'allowHtml' => true],
+    'sql' => ['type' => 'text', 'default' => '<div style="text-align: right">My document</div>'],
+];
+
+$GLOBALS['TL_DCA']['tl_iso_document']['fields']['usePdfFooter'] = [
+    'exclude' => true,
+    'inputType' => 'checkbox',
+    'eval' => ['submitOnChange' => true],
+    'sql' => "char(1) NOT NULL default ''",
+];
+
+$GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfFooter'] = [
+    'exclude' => true,
+    'inputType' => 'textarea',
+    'eval' => ['rte' => 'ace|html', 'mandatory' => true, 'allowHtml' => true],
+    'sql' => ['type' => 'text', 'default' => '<table width="100%">
+    <tr>
+        <td width="33%">{DATE j-m-Y}</td>
+        <td width="33%" align="center">{PAGENO}/{nbpg}</td>
+        <td width="33%" style="text-align: right; ">My document</td>
+    </tr>
+</table>'],
+];
+
 $GLOBALS['TL_DCA']['tl_iso_document']['fields']['usePdfTemplate'] = [
     'label' => &$GLOBALS['TL_LANG']['tl_iso_document']['usePdfTemplate'],
     'exclude' => true,
@@ -167,10 +201,14 @@ $GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfAuthor'] = [
     'sql' => ['type' => 'string', 'length' => 128, 'default' => ''],
 ];
 
+$GLOBALS['TL_DCA']['tl_iso_document']['palettes']['__selector__'][] = 'usePdfHeader';
+$GLOBALS['TL_DCA']['tl_iso_document']['palettes']['__selector__'][] = 'usePdfFooter';
 $GLOBALS['TL_DCA']['tl_iso_document']['palettes']['__selector__'][] = 'usePdfTemplate';
 $GLOBALS['TL_DCA']['tl_iso_document']['palettes']['__selector__'][] = 'appendPdfTemplate';
 $GLOBALS['TL_DCA']['tl_iso_document']['palettes']['__selector__'][] = 'useCustomFonts';
 
+$GLOBALS['TL_DCA']['tl_iso_document']['subpalettes']['usePdfHeader'] = 'pdfHeader';
+$GLOBALS['TL_DCA']['tl_iso_document']['subpalettes']['usePdfFooter'] = 'pdfFooter';
 $GLOBALS['TL_DCA']['tl_iso_document']['subpalettes']['usePdfTemplate'] = 'usePdfTemplateSRC';
 $GLOBALS['TL_DCA']['tl_iso_document']['subpalettes']['appendPdfTemplate'] = 'appendPdfTemplateSRC';
 $GLOBALS['TL_DCA']['tl_iso_document']['subpalettes']['useCustomFonts'] = 'customFontsDirectory,customFontsConfig';
@@ -182,6 +220,8 @@ PaletteManipulator::create()
     ->addLegend('font_legend', 'pdftemplate_legend')
     ->addField('useCustomFonts', 'font_legend', PaletteManipulator::POSITION_APPEND)
     ->addLegend('pdfconfig_legend', 'pdftemplate_legend', PaletteManipulator::POSITION_AFTER, true)
+    ->addField('usePdfHeader', 'pdfconfig_legend', PaletteManipulator::POSITION_APPEND)
+    ->addField('usePdfFooter', 'pdfconfig_legend', PaletteManipulator::POSITION_APPEND)
     ->addField('pdfFormat', 'pdfconfig_legend', PaletteManipulator::POSITION_APPEND)
     ->addField('pdfOrientation', 'pdfconfig_legend', PaletteManipulator::POSITION_APPEND)
     ->addField('pdfFormatCustom', 'pdfconfig_legend', PaletteManipulator::POSITION_APPEND)

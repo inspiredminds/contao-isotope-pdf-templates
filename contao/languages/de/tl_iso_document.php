@@ -34,3 +34,7 @@ $GLOBALS['TL_LANG']['tl_iso_document']['pdfDefaultFont'] = ['Hauptschriftart', '
 $GLOBALS['TL_LANG']['tl_iso_document']['pdfDefaultFontSize'] = ['Schriftgröße', 'Die Schriftgröße die als Basis im PDF verwendet werden soll.'];
 $GLOBALS['TL_LANG']['tl_iso_document']['pdfCreator'] = ['Ersteller', 'Hier wird der Ersteller des PDFs eingetragen.'];
 $GLOBALS['TL_LANG']['tl_iso_document']['pdfAuthor'] = ['Autor', 'Hier wird der Autor des PDFs eingetragen. Ansonsten wird die URL benutzt.'];
+$GLOBALS['TL_LANG']['tl_iso_document']['usePdfHeader'] = ['PDF Header benutzen', 'Aktiviert die Benutzung des PDF Header.'];
+$GLOBALS['TL_LANG']['tl_iso_document']['pdfHeader'] = ['PDF Header', 'Hier wird der PDF-Header erstellt.'];
+$GLOBALS['TL_LANG']['tl_iso_document']['usePdfFooter'] = ['PDF Footer benutzen', 'Aktiviert die Benutzung des PDF Footer.'];
+$GLOBALS['TL_LANG']['tl_iso_document']['pdfFooter'] = ['PDF Footer', 'Hier wird der PDF-Footer erstellt.'];
