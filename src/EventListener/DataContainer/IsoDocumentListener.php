@@ -48,7 +48,7 @@ class IsoDocumentListener
                 if ($font['filename'] === $defaultConfig[$i]['filename']) {
                     $defaultConfig[$i]['enabled'] = $font['enabled'];
                     $defaultConfig[$i]['variant'] = $font['variant'];
-                    $defaultConfig[$i]['fontname'] = strtolower($font['fontname']);
+                    $defaultConfig[$i]['fontname'] = strtolower($font['fontname'] ?? '');
                 }
             }
         }
@@ -64,7 +64,7 @@ class IsoDocumentListener
         for ($i = 0; $i < \count($defaultConfig); ++$i) {
             $defaultConfig[$i]['enabled'] = $userConfig[$i]['enabled'];
             $defaultConfig[$i]['variant'] = $userConfig[$i]['variant'];
-            $defaultConfig[$i]['fontname'] = strtolower($userConfig[$i]['fontname']);
+            $defaultConfig[$i]['fontname'] = strtolower($userConfig[$i]['fontname'] ?? '');
         }
 
         return serialize($defaultConfig);
