@@ -17,6 +17,28 @@ $GLOBALS['TL_DCA']['tl_iso_document']['config']['onload_callback'][] = [IsoDocum
 
 $GLOBALS['TL_DCA']['tl_iso_document']['palettes']['template'] = $GLOBALS['TL_DCA']['tl_iso_document']['palettes']['standard'];
 
+$GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfHeaderTemplate'] = [
+    'exclude'               => true,
+    'inputType'             => 'select',
+    'default'               => 'iso_document_header',
+    'options_callback'      => function() {
+        return \Isotope\Backend::getTemplates('iso_document_');
+    },
+    'eval'                  => array('includeBlankOption'=>true, 'chosen'=>true, 'tl_class'=>'w50'),
+    'sql'                   => "varchar(64) NOT NULL default ''",
+];
+
+$GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfFooterTemplate'] = [
+    'exclude'               => true,
+    'inputType'             => 'select',
+    'default'               => 'iso_document_footer',
+    'options_callback'      => function() {
+        return \Isotope\Backend::getTemplates('iso_document_');
+    },
+    'eval'                  => array('includeBlankOption'=>true, 'chosen'=>true, 'tl_class'=>'w50'),
+    'sql'                   => "varchar(64) NOT NULL default ''",
+];
+
 $GLOBALS['TL_DCA']['tl_iso_document']['fields']['usePdfTemplate'] = [
     'label' => &$GLOBALS['TL_LANG']['tl_iso_document']['usePdfTemplate'],
     'exclude' => true,
@@ -190,5 +212,7 @@ PaletteManipulator::create()
     ->addField('pdfDefaultFontSize', 'pdfconfig_legend', PaletteManipulator::POSITION_APPEND)
     ->addField('pdfCreator', 'pdfconfig_legend', PaletteManipulator::POSITION_APPEND)
     ->addField('pdfAuthor', 'pdfconfig_legend', PaletteManipulator::POSITION_APPEND)
+    ->addField('pdfHeaderTemplate', 'pdfconfig_legend', PaletteManipulator::POSITION_APPEND)
+    ->addField('pdfFooterTemplate', 'pdfconfig_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('template', 'tl_iso_document')
 ;
