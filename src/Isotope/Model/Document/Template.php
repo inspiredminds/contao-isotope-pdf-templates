@@ -83,19 +83,15 @@ class Template extends \Isotope\Model\Document\Standard
             'margin_top' => (int) ($margin['top'] ?? (\defined('PDF_MARGIN_TOP') ? PDF_MARGIN_TOP : 10)),
             'margin_bottom' => (int) ($margin['bottom'] ?? (\defined('PDF_MARGIN_BOTTOM') ? PDF_MARGIN_BOTTOM : 10)),
         ]);
-       
+
         // Add PDF Header
         if ($this->pdfHeaderTemplate) {
-            $template = new \Isotope\Template($this->pdfHeaderTemplate);
-            $buffer = $template->parse();
-            $pdf->SetHTMLHeader($buffer);
+            $pdf->SetHTMLHeader($this->parseCustomTemplate($this->pdfHeaderTemplate, $objCollection, $arrTokens));
         }
 
         // Add PDF Footer
         if ($this->pdfFooterTemplate) {
-            $template = new \Isotope\Template($this->pdfFooterTemplate);
-            $buffer = $template->parse();
-            $pdf->SetHTMLFooter($buffer);
+            $pdf->SetHTMLFooter($this->parseCustomTemplate($this->pdfFooterTemplate, $objCollection, $arrTokens));
         }
 
         // Set default font and size
@@ -151,5 +147,20 @@ class Template extends \Isotope\Model\Document\Standard
         }
 
         return $pdf;
+    }
+
+    /**
+     * Parses additional custom templates with the same data as the main template.
+     */
+    protected function parseCustomTemplate(string $templateName, IsotopeProductCollection $collection, array $tokens): string
+    {
+        $currentTemplate = $this->documentTpl;
+        $this->documentTpl = $templateName;
+
+        $buffer = $this->generateTemplate($collection, $tokens);
+
+        $this->documentTpl = $currentTemplate;
+
+        return $buffer;
     }
 }

@@ -12,32 +12,11 @@ declare(strict_types=1);
 
 use Contao\CoreBundle\DataContainer\PaletteManipulator;
 use InspiredMinds\ContaoIsotopePdfTemplatesBundle\EventListener\DataContainer\IsoDocumentListener;
+use Isotope\Backend;
 
 $GLOBALS['TL_DCA']['tl_iso_document']['config']['onload_callback'][] = [IsoDocumentListener::class, 'onLoadCallback'];
 
 $GLOBALS['TL_DCA']['tl_iso_document']['palettes']['template'] = $GLOBALS['TL_DCA']['tl_iso_document']['palettes']['standard'];
-
-$GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfHeaderTemplate'] = [
-    'exclude'               => true,
-    'inputType'             => 'select',
-    'default'               => 'iso_document_header',
-    'options_callback'      => function() {
-        return \Isotope\Backend::getTemplates('iso_document_');
-    },
-    'eval'                  => array('includeBlankOption'=>true, 'chosen'=>true, 'tl_class'=>'w50'),
-    'sql'                   => "varchar(64) NOT NULL default ''",
-];
-
-$GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfFooterTemplate'] = [
-    'exclude'               => true,
-    'inputType'             => 'select',
-    'default'               => 'iso_document_footer',
-    'options_callback'      => function() {
-        return \Isotope\Backend::getTemplates('iso_document_');
-    },
-    'eval'                  => array('includeBlankOption'=>true, 'chosen'=>true, 'tl_class'=>'w50'),
-    'sql'                   => "varchar(64) NOT NULL default ''",
-];
 
 $GLOBALS['TL_DCA']['tl_iso_document']['fields']['usePdfTemplate'] = [
     'label' => &$GLOBALS['TL_LANG']['tl_iso_document']['usePdfTemplate'],
@@ -187,6 +166,26 @@ $GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfAuthor'] = [
     'inputType' => 'text',
     'eval' => ['tl_class' => 'w50', 'maxlength' => 128],
     'sql' => ['type' => 'string', 'length' => 128, 'default' => ''],
+];
+
+$GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfHeaderTemplate'] = [
+    'exclude' => true,
+    'inputType' => 'select',
+    'options_callback' => static function (): array {
+        return Backend::getTemplates('iso_document_');
+    },
+    'eval' => ['includeBlankOption' => true, 'chosen' => true, 'tl_class' => 'w50'],
+    'sql' => "varchar(64) NOT NULL default ''",
+];
+
+$GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfFooterTemplate'] = [
+    'exclude' => true,
+    'inputType' => 'select',
+    'options_callback' => static function (): array {
+        return Backend::getTemplates('iso_document_');
+    },
+    'eval' => ['includeBlankOption' => true, 'chosen' => true, 'tl_class' => 'w50'],
+    'sql' => "varchar(64) NOT NULL default ''",
 ];
 
 $GLOBALS['TL_DCA']['tl_iso_document']['palettes']['__selector__'][] = 'usePdfTemplate';
