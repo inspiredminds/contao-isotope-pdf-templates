@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 use Contao\CoreBundle\DataContainer\PaletteManipulator;
 use InspiredMinds\ContaoIsotopePdfTemplatesBundle\EventListener\DataContainer\IsoDocumentListener;
+use Isotope\Backend;
 
 $GLOBALS['TL_DCA']['tl_iso_document']['config']['onload_callback'][] = [IsoDocumentListener::class, 'onLoadCallback'];
 
@@ -167,6 +168,26 @@ $GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfAuthor'] = [
     'sql' => ['type' => 'string', 'length' => 128, 'default' => ''],
 ];
 
+$GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfHeaderTemplate'] = [
+    'exclude' => true,
+    'inputType' => 'select',
+    'options_callback' => static function (): array {
+        return Backend::getTemplates('iso_document_');
+    },
+    'eval' => ['includeBlankOption' => true, 'chosen' => true, 'tl_class' => 'w50'],
+    'sql' => "varchar(64) NOT NULL default ''",
+];
+
+$GLOBALS['TL_DCA']['tl_iso_document']['fields']['pdfFooterTemplate'] = [
+    'exclude' => true,
+    'inputType' => 'select',
+    'options_callback' => static function (): array {
+        return Backend::getTemplates('iso_document_');
+    },
+    'eval' => ['includeBlankOption' => true, 'chosen' => true, 'tl_class' => 'w50'],
+    'sql' => "varchar(64) NOT NULL default ''",
+];
+
 $GLOBALS['TL_DCA']['tl_iso_document']['palettes']['__selector__'][] = 'usePdfTemplate';
 $GLOBALS['TL_DCA']['tl_iso_document']['palettes']['__selector__'][] = 'appendPdfTemplate';
 $GLOBALS['TL_DCA']['tl_iso_document']['palettes']['__selector__'][] = 'useCustomFonts';
@@ -190,5 +211,7 @@ PaletteManipulator::create()
     ->addField('pdfDefaultFontSize', 'pdfconfig_legend', PaletteManipulator::POSITION_APPEND)
     ->addField('pdfCreator', 'pdfconfig_legend', PaletteManipulator::POSITION_APPEND)
     ->addField('pdfAuthor', 'pdfconfig_legend', PaletteManipulator::POSITION_APPEND)
+    ->addField('pdfHeaderTemplate', 'pdfconfig_legend', PaletteManipulator::POSITION_APPEND)
+    ->addField('pdfFooterTemplate', 'pdfconfig_legend', PaletteManipulator::POSITION_APPEND)
     ->applyToPalette('template', 'tl_iso_document')
 ;

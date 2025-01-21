@@ -34,3 +34,5 @@ $GLOBALS['TL_LANG']['tl_iso_document']['pdfDefaultFont'] = ['Main font', 'The ma
 $GLOBALS['TL_LANG']['tl_iso_document']['pdfDefaultFontSize'] = ['Font size', 'The font size to be used as the base in the PDF.'];
 $GLOBALS['TL_LANG']['tl_iso_document']['pdfCreator'] = ['Creator', 'Define the creator of the PDF here.'];
 $GLOBALS['TL_LANG']['tl_iso_document']['pdfAuthor'] = ['Author', 'Define the author of the PDF here. Otherwise the URL will be used by default.'];
+$GLOBALS['TL_LANG']['tl_iso_document']['pdfHeaderTemplate'] = ['PDF header', 'If a header is desired in the PDF, the template can be selected here'];
+$GLOBALS['TL_LANG']['tl_iso_document']['pdfFooterTemplate'] = ['PDF footer', 'If a footer is desired in the PDF, the template can be selected here'];

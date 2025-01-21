@@ -84,6 +84,16 @@ class Template extends \Isotope\Model\Document\Standard
             'margin_bottom' => (int) ($margin['bottom'] ?? (\defined('PDF_MARGIN_BOTTOM') ? PDF_MARGIN_BOTTOM : 10)),
         ]);
 
+        // Add PDF Header
+        if ($this->pdfHeaderTemplate) {
+            $pdf->SetHTMLHeader($this->parseCustomTemplate($this->pdfHeaderTemplate, $objCollection, $arrTokens));
+        }
+
+        // Add PDF Footer
+        if ($this->pdfFooterTemplate) {
+            $pdf->SetHTMLFooter($this->parseCustomTemplate($this->pdfFooterTemplate, $objCollection, $arrTokens));
+        }
+
         // Set default font and size
         $pdf->SetDefaultFont($this->pdfDefaultFont ?: (\defined('PDF_FONT_NAME_MAIN') ? PDF_FONT_NAME_MAIN : 'freeserif'));
         $pdf->SetDefaultFontSize((int) ($this->pdfDefaultFontSize ?: (\defined('PDF_FONT_SIZE_MAIN') ? PDF_FONT_SIZE_MAIN : 10)));
@@ -137,5 +147,20 @@ class Template extends \Isotope\Model\Document\Standard
         }
 
         return $pdf;
+    }
+
+    /**
+     * Parses additional custom templates with the same data as the main template.
+     */
+    protected function parseCustomTemplate(string $templateName, IsotopeProductCollection $collection, array $tokens): string
+    {
+        $currentTemplate = $this->documentTpl;
+        $this->documentTpl = $templateName;
+
+        $buffer = $this->generateTemplate($collection, $tokens);
+
+        $this->documentTpl = $currentTemplate;
+
+        return $buffer;
     }
 }
