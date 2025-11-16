@@ -51,17 +51,14 @@ class Template extends \Isotope\Model\Document\Standard
         $fontData = $defaultFontConfig['fontdata'];
 
         // Add custom fonts
-        if ($this->useCustomFonts) {
-            if (null !== ($folder = FilesModel::findByUuid($this->customFontsDirectory))) {
-                $fontDirs[] = Path::join($projectDir, $folder->path);
+        if ($this->useCustomFonts && ($folder = FilesModel::findByUuid($this->customFontsDirectory))) {
+            $fontDirs[] = Path::join($projectDir, $folder->path);
 
-                $config = StringUtil::deserialize($this->customFontsConfig, true);
-                if (!empty($config)) {
-                    foreach ($config as $font) {
-                        if (!empty($font['fontname']) && $font['enabled']) {
-                            $fontData[$font['fontname']][$font['variant']] = $font['filename'];
-                        }
-                    }
+            $config = StringUtil::deserialize($this->customFontsConfig, true);
+
+            foreach ($config as $font) {
+                if (!empty($font['fontname']) && $font['enabled']) {
+                    $fontData[$font['fontname']][$font['variant']] = $font['filename'];
                 }
             }
         }
@@ -110,13 +107,12 @@ class Template extends \Isotope\Model\Document\Standard
         );
 
         // Check to use template
-        if ($this->usePdfTemplate) {
-            // Find file in database
-            if (null !== ($file = FilesModel::findById($this->usePdfTemplateSRC))) {
-                // Check if file exists
-                if (file_exists($projectDir.'/'.$file->path)) {
-                    $pdf->SetDocTemplate($projectDir.'/'.$file->path, true);
-                }
+        if ($this->usePdfTemplate && ($file = FilesModel::findById($this->usePdfTemplateSRC))) {
+            $path = Path::join($projectDir, $file->path);
+
+            // Check if file exists
+            if (file_exists($path)) {
+                $pdf->SetDocTemplate($path, true);
             }
         }
 
@@ -130,18 +126,17 @@ class Template extends \Isotope\Model\Document\Standard
         $pdf->SetDocTemplate();
 
         // Check to append PDF
-        if ($this->appendPdfTemplate) {
-            // Find file in database
-            if (null !== ($file = FilesModel::findById($this->appendPdfTemplateSRC))) {
-                // Check if file exists
-                if (file_exists($projectDir.'/'.$file->path)) {
-                    $pagecount = $pdf->SetSourceFile($projectDir.'/'.$file->path);
+        if ($this->appendPdfTemplate && ($file = FilesModel::findById($this->appendPdfTemplateSRC))) {
+            $path = Path::join($projectDir, $file->path);
+            
+            // Check if file exists            
+            if (file_exists($path)) {
+                $pagecount = $pdf->SetSourceFile($path);
 
-                    for ($i = 1; $i <= $pagecount; ++$i) {
-                        $pdf->AddPage();
-                        $tpl = $pdf->ImportPage($i);
-                        $pdf->UseTemplate($tpl);
-                    }
+                for ($i = 1; $i <= $pagecount; ++$i) {
+                    $pdf->AddPage();
+                    $tpl = $pdf->ImportPage($i);
+                    $pdf->UseTemplate($tpl);
                 }
             }
         }
